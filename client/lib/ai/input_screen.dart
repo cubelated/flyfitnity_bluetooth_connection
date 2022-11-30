@@ -169,7 +169,13 @@ class _InputScreenState extends State<InputScreen> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          gender = null;
+                          regular = null;
+                          ageController.text = '';
+                          weightController.text = '';
+                          heightController.text = '';
+                        },
                         child: const CustomText(
                           text: 'Reset',
                           color: Colors.white,

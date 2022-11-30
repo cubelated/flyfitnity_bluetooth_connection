@@ -218,18 +218,7 @@ class _ResultScreenState extends State<ResultScreen> {
                     size: 40,
                   ),
                   const SizedBox(
-                    height: 10,
-                  ),
-                  const CustomText(
-                    text: 'Result',
-                    size: 20,
-                  ),
-                  CustomText(
-                    text: input,
-                    size: 40,
-                  ),
-                  const SizedBox(
-                    height: 10,
+                    height: 30,
                   ),
                   const CustomText(
                     text: 'What you need to do:',
