@@ -26,6 +26,7 @@ class _DeviceScreen3State extends State<DeviceScreen3> {
 
   Duration duration = const Duration();
   Timer? timer;
+  int startingValue = 0;
 
   Stream<int> rssiStream() async* {
     var isConnected = true;
@@ -44,7 +45,7 @@ class _DeviceScreen3State extends State<DeviceScreen3> {
   bool isLoading = true;
   int exerciseTime = 0;
   int restTime = 0;
-  int caloriesBurned = 0;
+  double caloriesBurned = 0;
   int lastCycle = 0;
 
   @override
@@ -249,6 +250,8 @@ class _DeviceScreen3State extends State<DeviceScreen3> {
                                                                 int.parse(
                                                                     utf8.decode(
                                                                         value));
+                                                            caloriesBurned =
+                                                                cycle * 0.067;
                                                           });
                                                         });
                                                       },
@@ -279,6 +282,7 @@ class _DeviceScreen3State extends State<DeviceScreen3> {
                                                           resetTimer();
                                                           setState(() {
                                                             isStarting = false;
+
                                                             lastCycle = cycle;
                                                           });
                                                         },
@@ -296,22 +300,25 @@ class _DeviceScreen3State extends State<DeviceScreen3> {
                                                     shape: const CircleBorder(),
                                                   ),
                                                   onPressed: () async {
-                                                    if(isStarting == true) {
-                                                      exerciseTime = exerciseTime +
+                                                    if (isStarting == true) {
+                                                      exerciseTime =
+                                                          exerciseTime +
                                                               duration
                                                                   .inSeconds;
                                                     } else {
                                                       restTime = restTime +
-                                                              duration
-                                                                  .inSeconds;
+                                                          duration.inSeconds;
                                                     }
 
                                                     stopTimer();
 
-                                                    await characteristic
-                                                        .setNotifyValue(
-                                                            !characteristic
-                                                                .isNotifying);
+                                                    if (isStarting == true) {
+                                                      await characteristic
+                                                          .setNotifyValue(
+                                                              !characteristic
+                                                                  .isNotifying);
+                                                    }
+
                                                     var value =
                                                         await characteristic
                                                             .read();
@@ -320,6 +327,8 @@ class _DeviceScreen3State extends State<DeviceScreen3> {
                                                       isRunning = false;
                                                       cycle = int.parse(
                                                           utf8.decode(value));
+                                                      caloriesBurned =
+                                                          cycle * 0.067;
                                                     });
                                                   },
                                                   child: const CustomText(
@@ -484,7 +493,7 @@ class _DeviceScreen3State extends State<DeviceScreen3> {
                                                       children: [
                                                         CustomText(
                                                           text:
-                                                              '$caloriesBurned 卡',
+                                                              '${caloriesBurned.toStringAsFixed(1)} 卡',
                                                           color: yellow,
                                                           size: 18,
                                                         ),
@@ -559,18 +568,21 @@ class _DeviceScreen3State extends State<DeviceScreen3> {
                                               width: 290,
                                               height: 50,
                                               child: ElevatedButton(
-                                                  onPressed: isRunning == true ? null : () {
-                                                    exerciseTime = 0;
-                                                    restTime = 0;
-                                                    caloriesBurned = 0;
-                                                    cycle = 0;
-                                                    lastCycle = 0;
-                                                  },
-                                                  style:
-                                                      ElevatedButton.styleFrom(
-                                                        disabledBackgroundColor: Colors.grey,
-                                                          backgroundColor:
-                                                              yellow),
+                                                  onPressed: isRunning == true
+                                                      ? null
+                                                      : () {
+                                                          setState(() {
+                                                            exerciseTime = 0;
+                                                            restTime = 0;
+                                                            caloriesBurned = 0;
+                                                            cycle = 0;
+                                                            lastCycle = 0;
+                                                          });
+                                                        },
+                                                  style: ElevatedButton.styleFrom(
+                                                      disabledBackgroundColor:
+                                                          Colors.grey,
+                                                      backgroundColor: yellow),
                                                   child: const CustomText(
                                                     text: '完成訓練',
                                                     color: dark,

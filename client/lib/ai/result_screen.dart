@@ -173,6 +173,8 @@ class _ResultScreenState extends State<ResultScreen> {
       input = '${input}3';
     } else if (bmi < 35) {
       input = '${input}4';
+    } else {
+      input = '${input}4';
     }
 
     resultIndex = xlsxData.indexOf(input);
@@ -224,6 +226,9 @@ class _ResultScreenState extends State<ResultScreen> {
                     text: 'What you need to do:',
                     size: 18,
                   ),
+                  const SizedBox(
+                    height: 10,
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -234,16 +239,16 @@ class _ResultScreenState extends State<ResultScreen> {
                                 children: [
                                   const CustomText(
                                     text: '跑步機',
-                                    size: 16,
+                                    size: 18,
                                     weight: FontWeight.bold,
                                   ),
                                   CustomText(
                                     text: 'Power: ${treadmillData[resultIndex!].power}',
-                                    size: 14,
+                                    size: 16,
                                   ),
                                   CustomText(
                                     text: 'Time: ${treadmillData[resultIndex!].time} (min)',
-                                    size: 14,
+                                    size: 16,
                                   ),
                                 ],
                               ),
@@ -256,16 +261,16 @@ class _ResultScreenState extends State<ResultScreen> {
                                 children: [
                                   const CustomText(
                                     text: '橢圓機',
-                                    size: 16,
+                                    size: 18,
                                       weight: FontWeight.bold,
                                   ),
                                   CustomText(
                                     text: 'Power: ${swingData[resultIndex!].power}',
-                                    size: 14,
+                                    size: 16,
                                   ),
                                   CustomText(
                                     text: 'Time: ${swingData[resultIndex!].time} (min)',
-                                    size: 14,
+                                    size: 16,
                                   ),
                                 ],
                               ),
@@ -278,16 +283,16 @@ class _ResultScreenState extends State<ResultScreen> {
                                 children: [
                                   const CustomText(
                                     text: '健身車',
-                                    size: 16,
+                                    size: 18,
                                       weight: FontWeight.bold,
                                   ),
                                   CustomText(
                                     text: 'Power: ${fitData[resultIndex!].power}',
-                                    size: 14,
+                                    size: 16,
                                   ),
                                   CustomText(
                                     text: 'Time: ${fitData[resultIndex!].time} (min)',
-                                    size: 14,
+                                    size: 16,
                                   ),
                                 ],
                               ),
@@ -300,16 +305,16 @@ class _ResultScreenState extends State<ResultScreen> {
                                 children: [
                                   const CustomText(
                                     text: '飛輪車',
-                                    size: 16,
+                                    size: 18,
                                       weight: FontWeight.bold,
                                   ),
                                   CustomText(
                                     text: 'Power: ${bikeData[resultIndex!].power}',
-                                    size: 14,
+                                    size: 16,
                                   ),
                                   CustomText(
                                     text: 'Time: ${bikeData[resultIndex!].time} (min)',
-                                    size: 14,
+                                    size: 16,
                                   ),
                                 ],
                               ),

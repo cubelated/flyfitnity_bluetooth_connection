@@ -132,7 +132,7 @@ class _FindDevicesScreenState extends State<FindDevicesScreen> {
                   backgroundColor: yellow,
                   child: const Icon(Icons.search),
                   onPressed: () => FlutterBluePlus.instance
-                      .startScan(timeout: const Duration(seconds: 4)));
+                      .startScan(timeout: const Duration(seconds: 5)));
             }
           },
         ),
